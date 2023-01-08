@@ -1,5 +1,5 @@
 -- fat cursor
-vim.opt.guicursor = ""
+vim.opt.guicursor = "i:block"
 
 -- line numbering
 vim.opt.nu = true
