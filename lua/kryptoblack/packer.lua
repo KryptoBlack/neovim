@@ -54,5 +54,7 @@ return require('packer').startup(function(use)
         "jose-elias-alvarez/null-ls.nvim",
         requires = { "nvim-lua/plenary.nvim" },
     })
-true   use("terrortylor/nvim-comment")
+    use("terrortylor/nvim-comment")
+    use('francoiscabrol/ranger.vim')
+    use('rbgrouleff/bclose.vim')
 end)
