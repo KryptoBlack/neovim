@@ -58,9 +58,10 @@ vim.keymap.set("n", "<leader>S", "<C-w>s")
 vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
 
 -- floatterm
-vim.keymap.set('n', '<leader><F3>', vim.cmd.FloatermNew)
+vim.keymap.set('n', '<A-n>', '<C-\\><C-n>:FloatermToggle<CR>')
+vim.keymap.set('t', '<A-n>', '<C-\\><C-n>:FloatermToggle<CR>')
 
 -- lazy-git
-vim.keymap.set('n', '<leader>gs', function ()
+vim.keymap.set('n', '<leader>gs', function()
     vim.cmd('FloatermNew lazygit')
 end)
