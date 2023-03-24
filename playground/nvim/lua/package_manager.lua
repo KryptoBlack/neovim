@@ -29,6 +29,8 @@ require("lazy").setup({
     {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
     -- terminal in neovim
     'voldikss/vim-floaterm',
+    -- copilot
+    'github/copilot.vim',
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
