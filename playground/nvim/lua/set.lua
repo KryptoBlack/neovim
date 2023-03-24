@@ -34,3 +34,8 @@ vim.opt.showmode = false
 -- disable netrw in favour of nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+vim.opt.colorcolumn = "80"
+vim.opt.signcolumn = "yes"
+
+vim.opt.wrap = false

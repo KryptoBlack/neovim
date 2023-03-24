@@ -47,12 +47,12 @@ vim.keymap.set("n", "<leader>o", "o<Esc>0\"_D")
 vim.keymap.set("n", "<leader>O", "O<Esc>0\"_D")
 
 -- window movement
-vim.keymap.set("n", "<leader>l", "<C-w>l")
-vim.keymap.set("n", "<leader>h", "<C-w>h")
-vim.keymap.set("n", "<leader>k", "<C-w>k")
-vim.keymap.set("n", "<leader>j", "<C-w>j")
-vim.keymap.set("n", "<leader>V", "<C-w>v")
-vim.keymap.set("n", "<leader>S", "<C-w>s")
+vim.keymap.set("n", "<A-l>", "<C-w>l")
+vim.keymap.set("n", "<A-h>", "<C-w>h")
+vim.keymap.set("n", "<A-k>", "<C-w>k")
+vim.keymap.set("n", "<A-j>", "<C-w>j")
+vim.keymap.set("n", "<A-v>", "<C-w>v")
+vim.keymap.set("n", "<A-s>", "<C-w>s")
 
 -- undotree
 vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)

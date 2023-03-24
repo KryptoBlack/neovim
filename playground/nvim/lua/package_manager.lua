@@ -26,11 +26,25 @@ require("lazy").setup({
     -- nvim-treesetter
     'nvim-treesitter/nvim-treesitter',
     -- markdown viewer
-    {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
+    {
+        "ellisonleao/glow.nvim",
+        config = true,
+        cmd = "Glow"
+    },
     -- terminal in neovim
     'voldikss/vim-floaterm',
     -- copilot
     'github/copilot.vim',
+    -- null-ls
+    'jose-elias-alvarez/null-ls.nvim',
+    -- trouble (diagnostics)
+    {
+        "folke/trouble.nvim",
+        requires = "nvim-tree/nvim-web-devicons",
+    },
+    -- indent-blankline
+    'lukas-reineke/indent-blankline.nvim',
+    -- telescope
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
@@ -60,5 +74,4 @@ require("lazy").setup({
             { 'rafamadriz/friendly-snippets' }, -- Optional
         }
     }
-
 })
