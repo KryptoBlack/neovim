@@ -39,3 +39,10 @@ vim.opt.colorcolumn = "80"
 vim.opt.signcolumn = "yes"
 
 vim.opt.wrap = false
+
+-- floatterm
+vim.g.floaterm_width = 0.9
+vim.g.floaterm_height = 0.9
+
+-- diable mouse
+vim.opt.mouse = ""

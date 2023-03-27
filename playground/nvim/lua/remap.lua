@@ -60,6 +60,10 @@ vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
 -- floatterm
 vim.keymap.set('n', '<A-n>', '<C-\\><C-n>:FloatermToggle<CR>')
 vim.keymap.set('t', '<A-n>', '<C-\\><C-n>:FloatermToggle<CR>')
+vim.keymap.set('n', '<A-t>', '<C-\\><C-n>:FloatermNew<CR>')
+vim.keymap.set('t', '<A-t>', '<C-\\><C-n>:FloatermNew<CR>')
+vim.keymap.set('t', '<A-.>', '<C-\\><C-n>:FloatermNext<CR>')
+vim.keymap.set('t', '<A-,>', '<C-\\><C-n>:FloatermPrev<CR>')
 
 -- lazy-git
 vim.keymap.set('n', '<leader>gs', function()

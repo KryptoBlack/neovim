@@ -51,6 +51,8 @@ require("lazy").setup({
         branch = '0.1.1',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
+    -- deadcolumn
+    --    'Bekaboo/deadcolumn.nvim',
     -- lsp-zero
     {
         'VonHeikemen/lsp-zero.nvim',

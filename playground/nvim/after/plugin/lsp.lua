@@ -1,8 +1,8 @@
 local lsp = require('lsp-zero').preset({
-  name = 'minimal',
-  set_lsp_keymaps = true,
-  manage_nvim_cmp = true,
-  suggest_lsp_servers = true,
+    name = 'minimal',
+    set_lsp_keymaps = true,
+    manage_nvim_cmp = true,
+    suggest_lsp_servers = true,
 })
 
 lsp.ensure_installed({
@@ -37,6 +37,14 @@ lsp.configure('lua_ls', {
     }
 })
 
+-- Configure yaml language server
+lsp.configure('yamlls', {
+    settings = {
+        yaml = {
+            keyOrdering = false,
+        }
+    }
+})
+
 
 lsp.setup()
-
