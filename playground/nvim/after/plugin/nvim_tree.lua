@@ -3,16 +3,21 @@ require("nvim-tree").setup({
     view = {
         width = 30,
         mappings = {
-          list = {
-            -- { key = "<leader>o", action = "collapse" },
-          },
+            list = {
+                -- { key = "<leader>o", action = "collapse" },
+            },
         },
     },
     renderer = {
         group_empty = true,
     },
     filters = {
-        dotfiles =  false,
+        dotfiles = false,
+    },
+    actions = {
+        open_file = {
+            quit_on_open = true,
+        },
     },
 })
 
