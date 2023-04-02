@@ -6,7 +6,7 @@ RUN pacman --noconfirm -S git npm luarocks
 
 # IMPORTANT: will have to setup hack nerd font on terminal emulator for the 
 # icons to work in nvim-tree
-RUN pacman --noconfirm -S ttf-hack-nerd
+RUN pacman --noconfirm -S ttf-hack-nerd ripgrep
 
 # create a unpreveledged user
 ENV USER_NAME=kryptoblack
