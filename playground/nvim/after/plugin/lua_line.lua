@@ -1,2 +1,3 @@
-require('lualine').setup()
-
+require('lualine').setup({
+    disabled_filetypes = { 'NvimTree' },
+})

@@ -1,79 +1,87 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
+local path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if not vim.loop.fs_stat(path) then
+    local out = vim.fn.system({
         "git",
         "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
+        "--depth=1",
+        "https://github.com/wbthomason/packer.nvim.git",
+        path,
     })
+    print(out)
+else
+    print("Packer already installed")
 end
-vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+vim.cmd [[packadd packer.nvim]]
+
+return require("packer").startup(function(use)
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
+
     -- dir-tree
-    'nvim-tree/nvim-tree.lua',
-    'nvim-tree/nvim-web-devicons',
+    use 'nvim-tree/nvim-tree.lua'
+    -- web-devicons
+    use 'nvim-tree/nvim-web-devicons'
     -- colorscheme
-    'EdenEast/nightfox.nvim',
+    use 'EdenEast/nightfox.nvim'
     -- commenter
-    'preservim/nerdcommenter',
+    use 'preservim/nerdcommenter'
     -- statusbar
-    'nvim-lualine/lualine.nvim',
+    use 'nvim-lualine/lualine.nvim'
     -- undotree
-    'mbbill/undotree',
+    use 'mbbill/undotree'
     -- nvim-treesetter
-    'nvim-treesitter/nvim-treesitter',
+    use 'nvim-treesitter/nvim-treesitter'
     -- markdown viewer
-    {
-        "ellisonleao/glow.nvim",
-        config = true,
-        cmd = "Glow"
-    },
+    use {
+        "iamcco/markdown-preview.nvim",
+        build = function()
+            vim.fn["mkdp#util#install"]()
+        end,
+    }
     -- terminal in neovim
-    'voldikss/vim-floaterm',
+    use 'voldikss/vim-floaterm'
     -- copilot
-    'github/copilot.vim',
+    use 'github/copilot.vim'
     -- null-ls
-    'jose-elias-alvarez/null-ls.nvim',
+    use 'jose-elias-alvarez/null-ls.nvim'
     -- trouble (diagnostics)
-    {
+    use {
         "folke/trouble.nvim",
         requires = "nvim-tree/nvim-web-devicons",
-    },
+    }
     -- indent-blankline
-    'lukas-reineke/indent-blankline.nvim',
+    use 'lukas-reineke/indent-blankline.nvim'
     -- telescope
-    {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.1',
-        branch = '0.1.1',
-        dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' }
-    },
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        -- or                            , branch = '0.1.x',
+        requires = { { 'nvim-lua/plenary.nvim' } }
+    }
     -- deadcolumn
-    --    'Bekaboo/deadcolumn.nvim',
+    use 'Bekaboo/deadcolumn.nvim'
     -- lsp-zero
-    {
+    use {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
-        dependencies = {
+        branch = 'v2.x',
+        requires = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
+            { 'neovim/nvim-lspconfig' }, -- Required
+            {
+                               -- Optional
+                'williamboman/mason.nvim',
+                run = function()
+                    pcall(vim.cmd, 'MasonUpdate')
+                end,
+            },
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },         -- Required
-            { 'hrsh7th/cmp-nvim-lsp' },     -- Required
-            { 'hrsh7th/cmp-buffer' },       -- Optional
-            { 'hrsh7th/cmp-path' },         -- Optional
-            { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-            { 'hrsh7th/cmp-nvim-lua' },     -- Optional
-
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },             -- Required
-            { 'rafamadriz/friendly-snippets' }, -- Optional
+            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+            { 'L3MON4D3/LuaSnip' }, -- Required
         }
     }
-})
+end)
+end)
+end)
