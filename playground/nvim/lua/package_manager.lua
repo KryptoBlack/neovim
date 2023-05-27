@@ -17,7 +17,13 @@ vim.cmd [[packadd packer.nvim]]
 return require("packer").startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
-
+    -- Markdown preview
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && yarn install",
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+        ft = { "markdown" },
+    })
     -- dir-tree
     use 'nvim-tree/nvim-tree.lua'
     -- web-devicons
@@ -32,13 +38,6 @@ return require("packer").startup(function(use)
     use 'mbbill/undotree'
     -- nvim-treesetter
     use 'nvim-treesitter/nvim-treesitter'
-    -- markdown viewer
-    use {
-        "iamcco/markdown-preview.nvim",
-        build = function()
-            vim.fn["mkdp#util#install"]()
-        end,
-    }
     -- terminal in neovim
     use 'voldikss/vim-floaterm'
     -- copilot
@@ -55,7 +54,6 @@ return require("packer").startup(function(use)
     -- telescope
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
-        -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     -- deadcolumn
@@ -68,7 +66,7 @@ return require("packer").startup(function(use)
             -- LSP Support
             { 'neovim/nvim-lspconfig' }, -- Required
             {
-                               -- Optional
+                -- Optional
                 'williamboman/mason.nvim',
                 run = function()
                     pcall(vim.cmd, 'MasonUpdate')
@@ -77,11 +75,9 @@ return require("packer").startup(function(use)
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/nvim-cmp' },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' }, -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
         }
     }
-end)
-end)
 end)
