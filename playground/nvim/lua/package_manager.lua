@@ -57,7 +57,7 @@ return require("packer").startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     -- deadcolumn
-    use 'Bekaboo/deadcolumn.nvim'
+    --use 'Bekaboo/deadcolumn.nvim'
     -- lsp-zero
     use {
         'VonHeikemen/lsp-zero.nvim',

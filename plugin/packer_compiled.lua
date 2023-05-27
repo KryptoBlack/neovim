@@ -89,11 +89,6 @@ _G.packer_plugins = {
     path = "/home/kryptoblack/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
-  ["deadcolumn.nvim"] = {
-    loaded = true,
-    path = "/home/kryptoblack/.local/share/nvim/site/pack/packer/start/deadcolumn.nvim",
-    url = "https://github.com/Bekaboo/deadcolumn.nvim"
-  },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/home/kryptoblack/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
