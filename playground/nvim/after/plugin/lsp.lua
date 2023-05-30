@@ -5,6 +5,14 @@ local lsp = require('lsp-zero').preset({
     suggest_lsp_servers = true,
 })
 
+local cmp = require('cmp')
+
+cmp.setup({
+    mapping = {
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    }
+})
+
 lsp.ensure_installed({
     'pyright',
     'jsonls',
