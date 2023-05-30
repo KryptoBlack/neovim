@@ -69,3 +69,18 @@ vim.keymap.set('t', '<A-,>', '<C-\\><C-n>:FloatermPrev<CR>')
 vim.keymap.set('n', '<leader>gs', function()
     vim.cmd('FloatermNew lazygit')
 end)
+
+-- disable mouse
+-- scroll is read as arrow keys
+vim.keymap.set('n', '<up>', '<nop>')
+vim.keymap.set('n', '<down>', '<nop>')
+vim.keymap.set('n', '<left>', '<nop>')
+vim.keymap.set('n', '<right>', '<nop>')
+vim.keymap.set('i', '<up>', '<nop>')
+vim.keymap.set('i', '<down>', '<nop>')
+vim.keymap.set('i', '<left>', '<nop>')
+vim.keymap.set('i', '<right>', '<nop>')
+vim.keymap.set('v', '<up>', '<nop>')
+vim.keymap.set('v', '<down>', '<nop>')
+vim.keymap.set('v', '<left>', '<nop>')
+vim.keymap.set('v', '<right>', '<nop>')
