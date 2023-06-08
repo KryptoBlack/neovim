@@ -1,13 +1,13 @@
 -- https://github.com/EdenEast/nightfox.nvim
+--local nightfox = require("nightfox")
 
 -- Create a list
-local schemes = { "nightfox", "nordfox", "duskfox", "terafox", "carbonfox" }
+local scheme = { "nightfox", "nordfox", "duskfox" }
 
--- Randomly select a color scheme
+-- Randomly select a color scheme from the list
+local index = math.random(1, #scheme)
 
-local index = math.random(1, #schemes)
-local scheme = schemes[index]
+print('Your colorscheme for this session is ' .. scheme[index])
 
 -- Load the colorscheme
-vim.cmd("colorscheme " .. scheme)
-
+vim.cmd("colorscheme " .. scheme[index])
