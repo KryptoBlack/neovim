@@ -46,3 +46,6 @@ vim.g.floaterm_height = 0.9
 
 -- disable mouse
 vim.opt.mouse = ""
+
+-- remove ~ at end of buffer
+vim.opt.fillchars = { eob = " " }
