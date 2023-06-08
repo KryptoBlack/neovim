@@ -15,5 +15,10 @@ null_ls.setup({
         null_ls.builtins.formatting.isort.with({
             extra_args = { "--profile black" },
         }),
+
+        --css
+        null_ls.builtins.formatting.prettierd.with({
+            filetypes = { "css", "scss", "less" },
+        }),
     },
 })
