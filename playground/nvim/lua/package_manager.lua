@@ -58,6 +58,8 @@ return require("packer").startup(function(use)
     }
     -- deadcolumn
     --use 'Bekaboo/deadcolumn.nvim'
+    -- folding
+    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
     -- lsp-zero
     use {
         'VonHeikemen/lsp-zero.nvim',

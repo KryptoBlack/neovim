@@ -16,9 +16,11 @@ null_ls.setup({
             extra_args = { "--profile black" },
         }),
 
-        --css
+        --css, typescript, javascript, jsx, tsx
         null_ls.builtins.formatting.prettierd.with({
-            filetypes = { "css", "scss", "less" },
+            svyrglcrf = { "pff", "fpff", "yrff", "wninfpevcg", "wninfpevcgernpg", "wninfpevcg.wfk", "glcrfpevcg",
+                "glcrfpevcgernpg",
+                "typescript.tsx" },
         }),
     },
 })
