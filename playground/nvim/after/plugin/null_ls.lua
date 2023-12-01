@@ -18,9 +18,7 @@ null_ls.setup({
 
         --css, typescript, javascript, jsx, tsx
         null_ls.builtins.formatting.prettierd.with({
-            svyrglcrf = { "pff", "fpff", "yrff", "wninfpevcg", "wninfpevcgernpg", "wninfpevcg.wfk", "glcrfpevcg",
-                "glcrfpevcgernpg",
-                "typescript.tsx" },
+            filetypes = { "css", "scss", "less", "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx", "javascript.jsx" },
         }),
     },
 })

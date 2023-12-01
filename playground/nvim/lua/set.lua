@@ -49,3 +49,7 @@ vim.opt.mouse = ""
 
 -- remove ~ at end of buffer
 vim.opt.fillchars = { eob = " " }
+
+-- search case
+vim.opt.smartcase = true
+vim.opt.ignorecase = true

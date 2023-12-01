@@ -2,7 +2,13 @@
 --local nightfox = require("nightfox")
 
 -- Create a list
-local scheme = { "nightfox", "nordfox", "duskfox" }
+local scheme = {
+    -- "nightfox",
+    -- "nordfox",
+    -- "duskfox",
+    -- "terafox",
+    "carbonfox"
+}
 
 -- Randomly select a color scheme from the list
 local index = math.random(1, #scheme)

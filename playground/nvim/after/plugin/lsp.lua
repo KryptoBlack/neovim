@@ -15,7 +15,9 @@ cmp.setup({
 lsp.ensure_installed({
     'pyright',
     'jsonls',
-    'grammarly'
+    'grammarly',
+    'tsserver',
+    'lua_ls',
 })
 
 -- (Optional) Configure lua language server for neovim
@@ -42,6 +44,13 @@ lsp.configure('lua_ls', {
             }
         }
     }
+})
+
+-- Configure typescript language server
+lsp.configure('tsserver', {
+    on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+    end
 })
 
 -- Configure yaml language server

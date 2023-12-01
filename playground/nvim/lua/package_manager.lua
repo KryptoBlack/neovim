@@ -59,7 +59,7 @@ return require("packer").startup(function(use)
     -- deadcolumn
     --use 'Bekaboo/deadcolumn.nvim'
     -- folding
-    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
     -- lsp-zero
     use {
         'VonHeikemen/lsp-zero.nvim',
@@ -82,4 +82,13 @@ return require("packer").startup(function(use)
             { 'L3MON4D3/LuaSnip' },     -- Required
         }
     }
+    -- git diff
+    use "sindrets/diffview.nvim"
+    -- tabbed view
+    -- These optional plugins should be loaded directly because of a bug in Packer lazy loading
+    -- use 'nvim-tree/nvim-web-devicons' -- OPTIONAL: for file icons
+    use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
+    use 'romgrk/barbar.nvim'
+    -- log viewer
+    -- use 'MTDL9/vim-log-highlighting'
 end)
