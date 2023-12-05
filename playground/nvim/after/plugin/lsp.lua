@@ -47,11 +47,11 @@ lsp.configure('lua_ls', {
 })
 
 -- Configure typescript language server
-lsp.configure('tsserver', {
-    on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-    end
-})
+-- lsp.configure('tsserver', {
+-- on_attach = function(client)
+-- client.resolved_capabilities.document_formatting = false
+-- end
+-- })
 
 -- Configure yaml language server
 lsp.configure('yamlls', {

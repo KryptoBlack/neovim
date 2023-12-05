@@ -17,8 +17,8 @@ null_ls.setup({
         }),
 
         --css, typescript, javascript, jsx, tsx
-        null_ls.builtins.formatting.prettierd.with({
-            filetypes = { "css", "scss", "less", "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx", "javascript.jsx" },
-        }),
+        -- null_ls.builtins.formatting.prettierd.with({
+        -- filetypes = { "css", "scss", "less", "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx", "javascript.jsx" },
+        -- }),
     },
 })
