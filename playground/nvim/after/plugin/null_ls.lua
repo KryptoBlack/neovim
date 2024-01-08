@@ -8,7 +8,6 @@ null_ls.setup({
             --being able to detect packages in poetry I have disabled the error
             extra_args = { "--disable=E0401" },
         }),
-        null_ls.builtins.diagnostics.flake8,
         null_ls.builtins.formatting.black.with({
             extra_args = { "--line-length=79" },
         }),
@@ -17,8 +16,13 @@ null_ls.setup({
         }),
 
         --css, typescript, javascript, jsx, tsx
-        -- null_ls.builtins.formatting.prettierd.with({
-        -- filetypes = { "css", "scss", "less", "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx", "javascript.jsx" },
-        -- }),
+        null_ls.builtins.formatting.prettierd.with({
+            filetypes = { "css", "scss", "less", "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx", "javascript.jsx", "html", "json" },
+        }),
+
+        --latex
+        null_ls.builtins.formatting.latexindent.with({
+            filetypes = { "tex" },
+        }),
     },
 })

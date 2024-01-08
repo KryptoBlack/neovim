@@ -59,9 +59,11 @@ vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
 
 -- nerdcommenter
 -- vim registers / as _
-vim.keymap.set('i', '<C-_>', '<Esc><Plug>NERDCommenterToggle')
-vim.keymap.set('n', '<C-_>', '<Esc><Plug>NERDCommenterToggle')
-vim.keymap.set('v', '<C-_>', '<Plug>NERDCommenterToggle')
+--[[
+   [ vim.keymap.set('i', '<C-_>', '<Esc><Plug>NERDCommenterToggle')
+   [ vim.keymap.set('n', '<C-_>', '<Esc><Plug>NERDCommenterToggle')
+   [ vim.keymap.set('v', '<C-_>', '<Plug>NERDCommenterToggle')
+   ]]
 
 -- floatterm
 vim.keymap.set('n', '<A-n>', '<C-\\><C-n>:FloatermToggle<CR>')

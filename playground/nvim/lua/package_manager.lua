@@ -29,7 +29,8 @@ return require("packer").startup(function(use)
     -- web-devicons
     use 'nvim-tree/nvim-web-devicons'
     -- colorscheme
-    use 'EdenEast/nightfox.nvim'
+    -- use 'EdenEast/nightfox.nvim'
+    use 'folke/tokyonight.nvim'
     -- commenter
     use 'preservim/nerdcommenter'
     -- statusbar
@@ -39,7 +40,7 @@ return require("packer").startup(function(use)
     -- nvim-treesetter
     use 'nvim-treesitter/nvim-treesitter'
     -- terminal in neovim
-    use 'voldikss/vim-floaterm'
+    -- use 'voldikss/vim-floaterm'
     -- copilot
     use 'github/copilot.vim'
     -- null-ls
@@ -53,7 +54,7 @@ return require("packer").startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim'
     -- telescope
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.4',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     -- deadcolumn
@@ -89,6 +90,4 @@ return require("packer").startup(function(use)
     -- use 'nvim-tree/nvim-web-devicons' -- OPTIONAL: for file icons
     use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
     use 'romgrk/barbar.nvim'
-    -- log viewer
-    -- use 'MTDL9/vim-log-highlighting'
 end)
