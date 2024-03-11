@@ -29,11 +29,12 @@ vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
 -- due to different behaviours of Ctrl+c and Esc
+-- vim.keymap.set("i", "<C-c>", "<Esc>:w<CR>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- format code
 vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format()
+  vim.lsp.buf.format()
 end)
 
 -- substitute
@@ -75,7 +76,7 @@ vim.keymap.set('t', '<A-,>', '<C-\\><C-n>:FloatermPrev<CR>')
 
 -- lazy-git
 vim.keymap.set('n', '<leader>gs', function()
-    vim.cmd('FloatermNew lazygit')
+  vim.cmd('FloatermNew lazygit')
 end)
 
 -- disable mouse
