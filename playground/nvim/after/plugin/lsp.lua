@@ -12,13 +12,7 @@ cmp.setup({
   }
 })
 
-lsp.ensure_installed({
-  'pyright',
-  'jsonls',
-  'grammarly',
-  'tsserver',
-  'lua_ls',
-})
+lsp.ensure_installed({ 'lua_ls' })
 
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
