@@ -13,14 +13,14 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff = 10
 vim.opt.breakindent = true
+vim.opt.showmode = false
+vim.opt.swapfile = false
+vim.opt.mouse = ''
+vim.opt.scroll = 8
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Remap <C-d> and <C-u> to } and { respectively
-vim.keymap.set('n', '<C-d>', '}')
-vim.keymap.set('n', '<C-u>', '{')
 
 -- Remap <Esc> to C-[
 vim.keymap.set('i', 'C-[', '<Esc>')
@@ -32,17 +32,20 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Set cnext and cprev keymaps
+vim.keymap.set('n', '[q', '<cmd>cprev<CR>', { desc = 'Go to previous [Q]uickfix item' })
+vim.keymap.set('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next [Q]uickfix item' })
+
+-- Set alternate delete and put without writing to clipboard register
+vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete into blackhole register' })
+vim.keymap.set('v', '<leader>d', '"_d', { desc = 'Delete into blackhole register' })
+vim.keymap.set('v', '<leader>p', '"_dP', { desc = 'Delete into blackhole register then put' })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -54,6 +57,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- dumb project -- start
+local dumb_projects = { ['/home/kryptoblack/Documents/personal/source/neetcode'] = true }
+-- dumb project -- end
 
 -- bootstrap lazy.nvim -- start
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -110,10 +117,12 @@ require('lazy').setup {
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
           'vrischmann/tree-sitter-templ',
+          'victorhqc/tree-sitter-prisma',
         },
         opts = {
           extensions = {
             templ = 'templ',
+            prisma = 'prisma',
           },
         },
       },
@@ -141,13 +150,21 @@ require('lazy').setup {
         },
       }
 
+      -- For treesitter
+      vim.filetype.add {
+        extension = {
+          templ = 'templ',
+          prisma = 'prisma',
+        },
+      }
+
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      -- local extensions = require 'telescope'.extensions
+      local extensions = require('telescope').extensions
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -183,7 +200,7 @@ require('lazy').setup {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
-  {
+  { -- Harpoon
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -260,6 +277,10 @@ require('lazy').setup {
       'hrsh7th/cmp-path',
     },
     config = function()
+      if dumb_projects[vim.fn.getcwd()] ~= nil then
+        return false
+      end
+
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
@@ -367,18 +388,20 @@ require('lazy').setup {
               callback = vim.lsp.buf.clear_references,
             })
           end
+
+          if dumb_projects[vim.fn.getcwd()] == true then
+            vim.diagnostic.enable(false)
+          end
         end,
       })
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
+      if dumb_projects[vim.fn.getcwd()] ~= nil then
+        capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      end
 
       local servers = {
-        html = {
-          init_options = {
-            provideFormatter = false,
-          },
-        },
         lua_ls = {
           settings = {
             Lua = {
@@ -432,9 +455,129 @@ require('lazy').setup {
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'isort', 'black' },
-        javascript = { { 'prettierd', 'prettier' } },
+        javascript = { { 'prettierd', 'prettier', 'tsserver' } },
+        typescript = { { 'prettierd', 'prettier', 'tsserver' } },
         go = { 'gofumpt' },
       },
     },
+  },
+  { -- Collection of various small independent plugins/modules
+    'echasnovski/mini.nvim',
+    config = function()
+      -- Better Around/Inside textobjects
+      --
+      -- Examples:
+      --  - va)  - [V]isually select [A]round [)]paren
+      --  - yinq - [Y]ank [I]nside [N]ext [']quote
+      --  - ci'  - [C]hange [I]nside [']quote
+      require('mini.ai').setup { n_lines = 500 }
+
+      -- Add/delete/replace surroundings (brackets, quotes, etc.)
+      --
+      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+      -- - sd'   - [S]urround [D]elete [']quotes
+      -- - sr)'  - [S]urround [R]eplace [)] [']
+      require('mini.surround').setup()
+
+      -- Simple and easy statusline.
+      --  You could remove this setup call if you don't like it,
+      --  and try some other statusline plugin
+      local statusline = require 'mini.statusline'
+      -- set use_icons to true if you have a Nerd Font
+      statusline.setup { use_icons = true }
+
+      -- You can configure sections in the statusline by overriding their
+      -- default behavior. For example, here we set the section for
+      -- cursor location to LINE:COLUMN
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_location = function()
+        return '%2l:%-2v'
+      end
+
+      -- ... and there is more!
+      --  Check out: https://github.com/echasnovski/mini.nvim
+    end,
+  },
+  { -- Nvim UFO (folding)
+    'kevinhwang91/nvim-ufo',
+    dependencies = { 'kevinhwang91/promise-async' },
+    event = 'VimEnter',
+    keys = {
+      {
+        'zm',
+        function()
+          require('ufo').closeAllFolds()
+        end,
+        desc = '󱃄 Close All Folds',
+      },
+      {
+        'zr',
+        function()
+          require('ufo').openFoldsExceptKinds { 'comment', 'imports' }
+        end,
+        desc = '󱃄 Open All Regular Folds',
+      },
+      {
+        'zR',
+        function()
+          require('ufo').openFoldsExceptKinds {}
+        end,
+        desc = '󱃄 Open All Folds',
+      },
+      {
+        'z1',
+        function()
+          require('ufo').closeFoldsWith(1)
+        end,
+        desc = '󱃄 Close L1 Folds',
+      },
+      {
+        'z2',
+        function()
+          require('ufo').closeFoldsWith(2)
+        end,
+        desc = '󱃄 Close L2 Folds',
+      },
+      {
+        'z3',
+        function()
+          require('ufo').closeFoldsWith(3)
+        end,
+        desc = '󱃄 Close L3 Folds',
+      },
+      {
+        'z4',
+        function()
+          require('ufo').closeFoldsWith(4)
+        end,
+        desc = '󱃄 Close L4 Folds',
+      },
+    },
+    init = function()
+      -- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
+      -- auto-closing them after leaving insert mode, however ufo does not seem to
+      -- have equivalents for zr and zm because there is no saved fold level.
+      -- Consequently, the vim-internal fold levels need to be disabled by setting
+      -- them to 99
+      vim.o.foldcolumn = '1' -- '0' is not bad
+      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+    end,
+    config = function()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
+      local language_servers = require('lspconfig').util.available_servers()
+      for _, ls in ipairs(language_servers) do
+        require('lspconfig')[ls].setup {
+          capabilities = capabilities,
+        }
+      end
+
+      require('ufo').setup()
+    end,
   },
 }
