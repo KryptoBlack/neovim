@@ -8,7 +8,6 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.scroll = 4
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff = 10
@@ -59,7 +58,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- dumb project -- start
-local dumb_projects = { ['/home/kryptoblack/Documents/personal/source/neetcode'] = true }
+local dumb_projects = { ['/home/kryptoblack/Documents/personal/source/dsa/data-structures'] = true }
 -- dumb project -- end
 
 -- bootstrap lazy.nvim -- start
@@ -81,10 +80,10 @@ require('lazy').setup {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   { 'numToStr/Comment.nvim', opts = {} },
   { -- Colorscheme
-    'folke/tokyonight.nvim',
-    priority = 1000,
+    'rose-pine/neovim',
+    name = 'rose-pine',
     init = function()
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'rose-pine'
     end,
   },
   { -- Telescope
@@ -445,6 +444,7 @@ require('lazy').setup {
     },
     opts = {
       notify_on_error = false,
+      stop_after_first = true,
       format_on_save = function(bufnr)
         local disable_filetypes = { c = true, cpp = true }
         return {
@@ -457,6 +457,9 @@ require('lazy').setup {
         python = { 'isort', 'black' },
         javascript = { { 'prettierd', 'prettier', 'tsserver' } },
         typescript = { { 'prettierd', 'prettier', 'tsserver' } },
+        terraform = { 'terraformls' },
+        yaml = { 'yamlfmt' },
+        yml = { 'yamlfmt' },
         go = { 'gofumpt' },
       },
     },
@@ -579,5 +582,9 @@ require('lazy').setup {
 
       require('ufo').setup()
     end,
+  },
+  {
+    'kevinhwang91/nvim-hlslens',
+    opts = {},
   },
 }
